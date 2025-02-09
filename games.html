@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>游戏</title>
+    <style>
+        body {
+            font-family: 'Microsoft Yahei', Arial, sans-serif;
+            background: linear-gradient(to right, #74ebd5, #9face6);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        h1 {
+            margin-bottom: 40px;
+            color: #2c3e50;
+            font-size: 3em;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex; /* 水平排列 */
+            justify-content: center; /* 居中对齐 */
+            flex-wrap: wrap; /* 允许换行 */
+        }
+        li {
+            margin: 20px; /* 增加间距 */
+            width: calc(30% - 40px); /* 调整宽度，留出间距 */
+            max-width: 500px; /* 最大宽度 */
+            height: 500px; /* 固定高度 */
+        }
+        .game-item {
+            height: 100%; /* 高度填满父级 */
+            display: flex; /* 使用flexbox使内容居中 */
+            flex-direction: column; /* 垂直排列 */
+            align-items: center; /* 水平居中 */
+            justify-content: center; /* 垂直居中 */
+            border: 2px solid #2980b9;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .game-item:hover {
+            transform: scale(1.05);
+        }
+        a {
+            display: flex;
+            flex-direction: column; /* 垂直排列内容 */
+            align-items: center; /* 水平居中 */
+            text-decoration: none;
+            color: #2980b9; /* 链接颜色 */
+        }
+        img {
+            width: 80%; /* 调整为相对宽度 */
+            height: auto; /* 自动调整高度，保持比例 */
+            max-height: 500px; /* 最大高度 */
+            border-radius: 5px; /* 图片圆角 */
+            margin-bottom: 10px; /* 图片与文本的间距 */
+        }
+        .unavailable {
+            color: #f39c12; /* 使用橙色表示未上线 */
+            font-weight: bold; /* 加粗 */
+        }
+        footer {
+            margin-top: 30px;
+            font-size: 16px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>游戏</h1>
+    <ul>
+        <li class="game-item">
+            <a href="games/俄罗斯方块.html">
+                <img src="images/俄罗斯方块.png" alt="俄罗斯方块">
+                俄罗斯方块
+            </a>
+        </li>
+        <li class="game-item">
+            <a href="games/贪吃蛇.html">
+                <img src="images/贪吃蛇.png" alt="贪吃蛇">
+                贪吃蛇
+            </a>
+        </li>
+        <li class="game-item">
+            <a href="games/坦克大战.html">
+                <img src="images/坦克大战.png" alt="坦克大战">
+                <span class="unavailable">坦克大战（未上线）</span>
+            </a>
+        </li>
+        <li class="game-item">
+            <a href="games/五子棋.html">
+                <img src="images/五子棋.png" alt="五子棋">
+                <span class="unavailable">五子棋（未上线）</span>
+            </a>
+        </li>
+        <li class="game-item">
+            <a href="games/连连看.html">
+                <img src="images/连连看.png" alt="连连看">
+                <span class="unavailable">连连看（未上线）</span>
+            </a>
+        </li>
+        <li class="game-item">
+            <a href="games/2048.html">
+                <img src="images/2048.png" alt="2048">
+                <span class="unavailable">2048（未上线）</span>
+            </a>
+        </li>
+    </ul>
+</body>
+</html>

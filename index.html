@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYSTEM-MEMZ-XEK的个人网站</title>
+    <link rel="icon" href="images/profile.jpg" type="image/x-icon"> <!-- 添加图标 -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            background: url('images/background.jpg') no-repeat center center fixed;
+            background-size: cover; /* 背景图像覆盖整个页面 */
+            color: #333; /* 文字颜色 */
+            font-family: Arial, sans-serif; /* 字体 */
+            margin: 0;
+            padding: 0;
+        }
+
+        .homeContent {
+            display: flex; /* 使用flex布局 */
+            flex-direction: column; /* 纵向排列 */
+            align-items: center; /* 居中对齐 */
+            padding-top: 80px; /* 上边距，避免被导航条遮挡 */
+        }
+
+        .profilePic {
+            max-width: 100%; /* 最大宽度为100% */
+            height: auto; /* 高度自适应 */
+            margin-top: 20px; /* 上边距 */
+            border-radius: 50%; /* 圆形头像 */
+        }
+
+        
+    /* 音乐播放器样式调整 */
+    .musicPlayer {
+        width: 300px; /* 调整宽度 */
+        height: 150px; /* 调整高度以容纳更多信息 */
+        background-color: #fff;
+        border: 1px solid #ccc;
+        padding: 10px;
+        position: fixed; /* 保持固定定位 */
+        top: 20px; /* 距离顶部20px */
+        left: 20px; /* 距离左侧20px */
+        z-index: 1000; /* 确保播放器在其他内容之上 */
+        display: flex;
+        flex-direction: column; /* 纵向排列 */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+        border-radius: 8px; /* 圆角 */
+    }
+
+    .musicPlayerTitleBar {
+        background-color: #0078d7;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center; /* 确保标题和关闭按钮垂直居中 */
+        width: 100%;
+        padding: 5px 10px;
+        cursor: move; /* 使光标变成移动样式 */
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+    }
+
+    .musicPlayerTitle {
+        margin: 0;
+        text-transform: uppercase; /* 确保标题是大写 */
+    }
+
+    .closeButton {
+        background-color: transparent;
+        border: none;
+        color: white;
+        cursor: pointer;
+        font-size: 20px;
+        padding: 0; /* 移除内边距 */
+    }
+
+    .closeButton:hover {
+        background-color: #0062cc; /* 暂停时变为深蓝色 */
+        color: white;
+        border-radius: 50%;
+    }
+
+    .musicControls {
+        display: flex;
+        justify-content: space-around; /* 均匀分布 */
+        align-items: center; /* 水平居中 */
+        margin-top: 10px; /* 上边距 */
+    }
+
+    .musicControls button {
+        padding: 5px 10px;
+        border: none;
+        background-color: #0078d7;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s; /* 添加过渡效果 */
+    }
+
+    .musicControls button:hover {
+        background-color: #0062cc; /* 暂停时变为深蓝色 */
+    }
+
+    .musicControls button:active {
+        background-color: #0052b3; /* 活动时变为更深蓝色 */
+    }
+
+    .musicProgress {
+        width: 100%;
+        height: 5px;
+        background-color: #ccc;
+        margin-top: 10px; /* 上边距 */
+    }
+
+    .musicProgress progress {
+        width: 100%;
+        height: 100%;
+        appearance: none;
+        background-color: #0078d7;
+        border: none;
+        border-radius: 3px;
+    }
+
+    .songInfo {
+        margin: 0 10px;
+        text-align: center; /* 文字居中 */
+    }
+
+    .timeDisplay {
+        font-size: 13px;
+        color: #333;
+        text-align: center; /* 文字居中 */
+    }
+</style>
+
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav id="mainNav">
+        <ul>
+            <li><a href="#home" class="navLink" onclick="scrollToSection('home')">首页</a></li>
+            <li><a href="#portfolio" class="navLink" onclick="scrollToSection('portfolio')">作品集</a></li>
+            <li><a href="#contact" class="navLink" onclick="scrollToSection('contact')">联系方式</a></li>
+            <li><a href="UpdateLog.html" class="">网站更新日志</a></li>
+            <li><a href="games.html" class="">游戏</a></li>
+            <li><a href="Documents.html" target="_blank">文档</a></li>
+            <div id="clock" style="text-align: center; font-size: 20px; color: rgb(121, 114, 114); margin-top: 1px;">00:00:00</div>
+        </ul>
+    </nav>
+
+    <!-- 音乐播放器 -->
+<div class="musicPlayer" id="musicPlayer">
+    <div class="musicPlayerTitleBar">
+        <span class="musicPlayerTitle">音乐播放器</span>
+        <button class="closeButton" onclick="closeMusicPlayer()">X</button>
+    </div>
+    <div class="songInfo">
+        <p id="songTitle"></p>
+    </div>
+    <div class="musicControls">
+        <button onclick="prevSong()">上一曲</button>
+        <button onclick="playAudio()">播放</button>
+        <button onclick="pauseAudio()">暂停</button>
+        <button onclick="nextSong()">下一曲</button>
+    </div>
+    <progress id="progress" class="musicProgress" value="0" max="1"></progress>
+    <div class="timeDisplay">
+        <span id="currentTime">00:00</span> / <span id="totalTime">00:00</span>
+    </div>
+</div>
+
+
+    <script>
+        // 音频播放控制函数
+        const audio = new Audio();
+        const songs = [
+            { title: 'The Hacker', src: 'musics/The Hacker.mp3' },
+            { title: '5-20AM-刀酱--落风', src: 'musics/5-20AM-刀酱--落风.mp3' },
+            { title: 'aLIEz', src: 'musics/aLIEz.mp3' },
+            { title: 'BBC World 2013 Countdown', src: 'musics/BBC World 2013 Countdown.m4a' },
+            { title: 'Better Now-Blanks', src: 'musics/Better Now-Blanks.mp3' },
+            { title: 'China-PiPa', src: 'musics/China-PiPa.mp3' },
+            { title: 'China-x', src: 'musics/China-x.mp3' },
+            { title: 'Cloud 9-Tobu-Itro', src: 'musics/Cloud 9-Tobu-Itro.mp3' },
+            { title: 'Counting Stars', src: 'musics/Counting Stars.mp3' },
+            { title: 'Heaven REmady', src: 'musics/Heaven REmady.mp3' },
+            { title: 'Midnight City-M83', src: 'musics/Midnight City-M83.mp3' },
+            { title: 'Navada' , src: 'musics/Navada.mp3' },
+            { title: 'Never gonna give you up', src: 'musics/Never gonna give you up.m4a' },
+            { title: 'Really Slow Motion - Suns and Stars', src: 'musics/Really Slow Motion - Suns and Stars.mp3' },
+            { title: 'Sea of Tranquility', src: 'musics/Sea of Tranquility.m4a' },
+            { title: 'Seve', src: 'musics/Seve.m4a' },
+            { title: 'Shed a Light-Robin Schulz,David Guetta,Cheat Codes', src: 'musics/Shed a Light-Robin Schulz,David Guetta,Cheat Codes.mp3' },
+            { title: 'Shed a Light', src: 'musics/Shed a Light.mp3' },
+            { title: 'Shots', src: 'musics/Shots.mp3' },
+            { title: 'Sold Out', src: 'musics/Sold Out.mp3' },
+            { title: 'Something Just Like This', src: 'musics/Something Just Like This.mp3' },
+            { title: 'Spring Festival （年味中国）', src: 'musics/Spring Festival （年味中国）.mp3' },
+            { title: 'STAY(Clean) - The Kid LAROI&Justin Bieber', src: 'musics/STAY(Clean) - The Kid LAROI&Justin Bieber.mp3' },
+            { title: 'Sun', src: 'musics/Sun.m4a' },
+            { title: 'Sweet Dreams -Are Made Of This--Eurythmics', src: 'musics/Sweet Dreams -Are Made Of This--Eurythmics.mp3' },
+            { title: 'Turn All The Lights On-T-Pain,Ne-Yo', src: 'musics/Turn All The Lights On-T-Pain,Ne-Yo.mp3' },
+            { title: 'Undead Funeral March-Ugress', src: 'musics/Undead Funeral March-Ugress.mp3' },
+            { title: 'Unwelcome school', src: 'musics/Unwelcome school.m4a' },
+            { title: 'Uptown Funk', src: 'musics/Uptown Funk.mp3' },
+        ];
+        let currentSongIndex = 0;
+
+        // 初始化歌曲
+        function loadSong() {
+            const currentSong = songs[currentSongIndex];
+            audio.src = currentSong.src;
+            document.getElementById('songTitle').textContent = currentSong.title;
+        }
+        loadSong();
+
+        function playAudio() {
+            audio.play();
+        }
+
+        function pauseAudio() {
+            audio.pause();
+        }
+
+        // 切换到上一曲
+        function prevSong() {
+            currentSongIndex--;
+            if (currentSongIndex < 0) {
+                currentSongIndex = songs.length - 1;
+            }
+            loadSong();
+            audio.play();
+        }
+
+        // 切换到下一曲
+        function nextSong() {
+            currentSongIndex++;
+            if (currentSongIndex >= songs.length) {
+                currentSongIndex = 0;
+            }
+            loadSong();
+            audio.play();
+        }
+
+        // 更新进度条
+        audio.addEventListener('timeupdate', () => {
+            const progress = document.getElementById('progress');
+            progress.value = audio.currentTime / audio.duration;
+
+            const currentTimeDisplay = document.getElementById('currentTime');
+            const totalTimeDisplay = document.getElementById('totalTime');
+
+            currentTimeDisplay.textContent = formatTime(audio.currentTime);
+
+            if (!isNaN(audio.duration)) { // 检查总时间是否有效
+                totalTimeDisplay.textContent = formatTime(audio.duration);
+            }
+        });
+
+        // 调整进度
+        const progress = document.getElementById('progress');
+        progress.addEventListener('click', (e) => {
+            const rect = progress.getBoundingClientRect();
+            const offsetX = e.clientX - rect.left;
+            const percentage = offsetX / rect.width;
+            audio.currentTime = percentage * audio.duration;
+        });
+
+        // 格式化时间函数
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = Math.floor(seconds % 60);
+            return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+        }
+
+        // 时钟更新代码
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock(); // 初始调用以立即显示时间
+    </script>
+
+    <script>
+        function closeMusicPlayer() {
+            const musicPlayer = document.getElementById('musicPlayer');
+            musicPlayer.style.display = 'none'; // 关闭播放器时隐藏它
+        }
+
+        const musicPlayer = document.getElementById('musicPlayer');
+        const musicPlayerTitleBar = document.querySelector('.musicPlayerTitleBar');
+        let isDragging = false;
+        let offsetX, offsetY;
+
+        musicPlayerTitleBar.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            offsetX = e.clientX - musicPlayer.getBoundingClientRect().left;
+            offsetY = e.clientY - musicPlayer.getBoundingClientRect().top;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                musicPlayer.style.left = (e.clientX - offsetX) + 'px';
+                musicPlayer.style.top = (e.clientY - offsetY) + 'px';
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+    </script>
+
+    <!-- 首页部分 -->
+    <section id="home">
+        <div class="homeContent">
+            <h1 id="typingEffect"></h1>
+            <p>在这里你可以了解更多关于我、我的技能以及我的工作内容。</p>
+            <img src="images/profile.jpg" alt="我的头像" class="profilePic">
+            
+            <!-- 关于我部分内容 -->
+            <h2>关于我</h2>
+            <p>我的名字是SYSTEM-MEMZ-XEK,我是一位高中生，目前就读于炳辉中学。我热爱编程与计算机，喜欢研究新技术，学习新知识。我希望通过我的技能和经验为更多的人提供帮助。</p>
+        </div>
+    </section>
+
+    <!-- 作品集部分 -->
+    <section id="portfolio">
+        <h2 style="text-align: center;">我在哔哩哔哩上的部分作品</h2>
+        <div class="portfolioContent">
+            <div class="project">
+                <h3>播放量较高的视频</h3>
+            </div>
+            <div class="iframe-container" style="display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start;">
+                <!-- 视频选择下拉菜单 -->
+                <select id="videoSelect" onchange="changeVideo()" style="padding: 10px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc;">
+                    <option value="https://player.bilibili.com/player.html?bvid=BV1ZwvKebEfh">当我试图在安卓模拟器上跑分</option>
+                    <option value="https://player.bilibili.com/player.html?bvid=BV1oDaYefEbx">请选择你的杀毒软件</option>
+                    <option value="https://player.bilibili.com/player.html?bvid=BV1NG411m7Ji">《Microsoft Edge 11.45.14》</option>
+                    <option value="https://player.bilibili.com/player.html?bvid=BV1V8411o7bt">Windows11安装程序2.0</option>
+                    <option value="https://player.bilibili.com/player.html?bvid=BV14m4y1W765">安装从网上随便下载的WindowsXP sp3会怎么样？</option>
+                </select>
+            </div>
+            <div class="iframe-container" style="margin-top: 20px;">
+                <!-- 视频播放器 -->
+                <iframe id="videoPlayer" src="https://player.bilibili.com/player.html?bvid=BV1V8411o7bt" width="100%" height="600" style="border: none;"></iframe>
+            </div>
+        </div>
+        <script>
+            function changeVideo() {
+                var select = document.getElementById("videoSelect");
+                var iframe = document.getElementById("videoPlayer");
+                iframe.src = select.value; // 更新iframe的src属性为选择的视频链接
+            }
+        </script>
+    </section>
+    
+    <!-- 工具部分 -->   
+    <section id="tools">
+        <h2 style="text-align: center;">工具网站</h2>
+        <div class="contactContent" style="display: flex; flex-direction: column; align-items: center;">
+            <p>这里是我收藏的工具网站，你可以点击按钮来访问。</p>
+            <div style="display: flex; flex-direction: row; align-items: center; margin-top: 20px;">
+                <button class="button" style="margin: 0 10px;" onclick="window.location.href='https://www.remove.bg/zh'">在线图片处理工具</button>
+                <button class="button" style="margin: 0 10px;" onclick="window.location.href='https://www.geogebra.org/graphing?lang=zh_CN'">函数绘制工具</button>
+                <button class="button" style="margin: 0 10px;" onclick="window.location.href='https://www.desmos.com/scientific?lang=zh-CN'">数学计算器</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 联系方式部分 -->
+    <section id="contact">
+        <h2>联系方式</h2>
+        <div class="contactContent" style="display: flex; flex-direction: column; align-items: center;">
+            <p>你可以通过以下方式联系我：</p>
+            <ul style="display: flex; list-style-type: none; padding: 0; margin: 0; justify-content: center;">
+                <li style="margin-right: 20px;">
+                    <button class="button" onclick="window.location.href=''">邮箱：XEK20090428@163.com</button>   
+                </li>
+                <li style="margin-right: 20px;">
+                    <button class="button" onclick="window.location.href=''">QQ:1635075096</button>
+                </li>
+                <li>
+                    <a href="https://space.bilibili.com/3493115711196019" target="_blank" class="button">访问哔哩哔哩主页</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+</body>
+</html>
