@@ -3,92 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>如何在GitHub上建立自己的网站（AI制作，未完工，后续将增加图文教程）</title>
+    <title>如何在GitHub上建立自己的网站</title>
     <style>
         body {
-            font-family: 'Microsoft Yahei', Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-            line-height: 1.6;
-            color: #333;
+            /* 保持原有基础样式 */
+            background: linear-gradient(45deg, #1a1a1a, #2d2d2d);
         }
+
         h1 {
-            color: #2c3e50;
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 2.5em;
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+            font-size: 2.8em;
+            background: linear-gradient(45deg, #4A90E2, #6C5B7B);
+            -webkit-background-clip: text;
+            background-clip: text;
+            margin-bottom: 40px;
         }
+
         h2 {
-            color: #2980b9;
-            margin-top: 30px;
-            margin-bottom: 10px;
-            font-size: 1.8em;
+            border-left: 5px solid #4A90E2;
+            padding-left: 15px;
+            margin: 40px 0 20px;
         }
-        p {
-            margin: 10px 0;
-        }
+
         ol {
-            margin: 20px 0;
-            padding-left: 20px;
+            display: grid;
+            gap: 15px;
+            counter-reset: step;
         }
+
+        ol li {
+            position: relative;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        ol li::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: -25px;
+            background: #4A90E2;
+            color: white; /* 已存在白色字体设置 */
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            /* 新增文字阴影增强对比度 */
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
         pre {
-            background-color: #eaeaea;
-            border-left: 4px solid #2980b9;
-            padding: 10px;
-            overflow: auto;
-            border-radius: 5px;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(74, 144, 226, 0.3);
         }
+
         a {
-            color: #2980b9;
-            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
         }
-        a:hover {
-            text-decoration: underline;
+
+        a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #4A90E2;
+            transition: width 0.3s ease;
         }
+
+        a:hover::after {
+            width: 100%;
+        }
+
+        iframe {
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgb(255, 255, 255);
+            margin: 30px 0;
+        }
+
         footer {
-            margin-top: 40px;
-            text-align: center;
-            font-size: 14px;
-            color: #666;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgb(255, 255, 255);
         }
     </style>
 </head>
 <body>
-    <h1>如何在GitHub上建立自己的网站（AI制作，未完工，后续将增加图文教程）</h1>
-    <p>GitHub是全球最大的开源代码托管平台，可以让你和他人协作开发项目。下面是如何在GitHub上建立自己的网站的步骤：</p>
+    <h1>如何在GitHub上建立自己的网站</h1>
     <ol>
         <li>注册GitHub账号</li>
         <li>创建仓库</li>
-        <li>安装visual studio code和fitten code</li>
-        <li>新建HTML、CSS、JavaScript文件</li>
+        <li>安装开发工具</li>
+        <li>创建网站文件</li>
         <li>编辑网页内容</li>
-        <li>上传网页内容至GitHub仓库</li>
+        <li>部署到GitHub</li>
         <li>注意事项</li>
-        <li>视频教程</li>
     </ol>
-    <h2>一、注册GitHub账号</h2>
-    <p>首先，你需要注册一个GitHub账号。你可以访问<a href="https://github.com/">GitHub官网</a>，点击右上角的Sign up按钮，填写相关信息即可。</p>
+
+    <h2>三、安装开发工具</h2>
+    <p>需要安装：
+        <a href="https://code.visualstudio.com/">Visual Studio Code</a> 和 
+        <a href="https://git-scm.com/">Git</a>
+    </p>
+    <pre>git config --global user.name "你的用户名"
+git config --global user.email "你的邮箱"</pre>
+
+    <style>
+        body {
+            font-family: 'Microsoft Yahei', sans-serif;
+            /* 保持原有动画和背景样式 */
+        }
+
+        /* 新增代码块样式 */
+        .code-example {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .code-example pre {
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+
+            body {
+                background: white !important;
+                color: #333;
+            }
+
+            ol li {
+                background: #f8f9fa;
+            }
+
+            .code-example,
+            pre {
+                font-family: 'Microsoft Yahei', monospace;
+                background: #f8f9fa !important;
+                color: #333;
+            }
+
+            iframe {
+                box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            }
+
+            footer {
+                border-top: 1px solid rgba(0,0,0,0.1);
+            }
+        </style>
+    </style>
+
+    <!-- 在现有内容中补充详细步骤 -->
     <h2>二、创建仓库</h2>
-    <p>创建仓库的第一步是登录GitHub账号。登录成功后，点击右上角的Your repositories按钮，然后点击New repository按钮，填写仓库名称、描述、是否公开等信息，点击Create repository按钮即可。</p>
-    <h2>三、安装visual studio code和fitten code</h2>
-    <p>安装visual studio code和fitten code的第一步是访问<a href="https://code.visualstudio.com/">Visual Studio Code官网</a>和<a href="https://fitcode.com/">Fitten Code官网</a>，下载安装包。安装成功后，打开Visual Studio Code，点击Extensions按钮，搜索Live Server，安装Live Server插件，点击左下角的Live Server按钮，就可以在浏览器中实时预览网站内容。</p>
-    <h2>四、新建HTML、CSS、JavaScript文件</h2>
-    <p>新建HTML、CSS、JavaScript文件的第一步是打开仓库目录，点击New file按钮，输入文件名称，点击Create file按钮，编辑文件内容，保存文件。</p>
+    <div class="code-example">
+        <p>正确仓库命名示例：</p>
+        <pre>用户名：yourname
+    仓库名：yourname.github.io</pre>
+    </div>
+
+    <h2>四、创建网站文件</h2>
+    <div class="code-example">
+        <p>基础HTML结构示例：</p>
+        <pre>&lt;!DOCTYPE html&gt;
+    &lt;html lang="zh"&gt;
+    &lt;head&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;title&gt;我的网站&lt;/title&gt;
+        &lt;link rel="stylesheet" href="css/style.css"&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;欢迎来到我的网站&lt;/h1&gt;
+    &lt;/body&gt;
+    &lt;/html&gt;</pre>
+    </div>
+
     <h2>五、编辑网页内容</h2>
-    <p>编辑网页内容的第一步是打开HTML文件，编辑文件内容，保存文件。</p>
-    <p>编辑CSS文件的第一步是打开CSS文件，编辑文件内容，保存文件。</p>
-    <p>编辑JavaScript文件的第一步是打开JavaScript文件，编辑文件内容，保存文件。</p>
-    <h2>六、上传网页内容至GitHub仓库</h2>
-    <p>上传网页内容至GitHub仓库的第一步是点击仓库目录，点击Upload files按钮，选择需要上传的文件，点击Commit changes按钮，填写提交信息，点击Commit changes按钮，完成上传。</p>
-    <h2>七、注意事项</h2>
-    <p>创建仓库时，请注意仓库名称，必须是“你的用户名.github.io”的格式，否则无法通过https://你的用户名.github.io访问网站。</p>
-    <p>不要一次性上传超过100个文件，否则可能会导致上传失败，可以分批次上传。</p>
-    <h2>八、如果文字叙述无法理解，这里有我在哔哩哔哩上录制的视频教程：</h2>
-    <iframe src="https://player.bilibili.com/player.html?bvid=BV1Z81aYrE6o" width="100%" height="600" style="border: none;"></iframe>
-    <footer>
-        <p>SYSTEM-MEMZ-XEK</p>
-    </footer>
+    <div class="code-example">
+        <p>基础CSS示例（保存为css/style.css）：</p>
+        <pre>body {
+        background: #1a1a1a;
+        color: white;
+        font-family: 'Microsoft Yahei';
+    }
+
+    h1 {
+        color: #4A90E2;
+        text-align: center;
+    }</pre>
+    </div>
+
+    <h2>六、部署到GitHub</h2>
+    <div class="code-example">
+        <p>Git命令流程：</p>
+        <pre># 初始化仓库
+    git init
+
+    # 添加所有文件
+    git add .
+
+    # 提交更改
+    git commit -m "首次提交"
+
+    # 关联远程仓库
+    git remote add origin https://github.com/yourname/yourname.github.io
+
+    # 推送到GitHub
+    git push -u origin main</pre>
+    </div>
+    <script>
+        document.querySelectorAll('ol li').forEach((li, index) => {
+            li.style.setProperty('--i', index);
+        });
+    </script>
 </body>
 </html>

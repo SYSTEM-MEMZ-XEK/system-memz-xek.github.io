@@ -7,15 +7,31 @@
     <link rel="icon" href="images/profile.jpg" type="image/x-icon"> <!-- 添加图标 -->
     <link rel="stylesheet" href="css/style.css">
     <style>
+        
         body {
             background: url('images/background.jpg') no-repeat center center fixed;
-            background-size: cover; /* 背景图像覆盖整个页面 */
-            color: #333; /* 文字颜色 */
-            font-family: Arial, sans-serif; /* 字体 */
+            background-size: cover;
+            color: white; /* 修改为白色 */
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
 
+        .button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white; /* 新增文字颜色 */
+            transition: all 0.3s ease;
+        }
+        
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            color: white; /* 新增文字颜色 */
+            background: rgba(0, 0, 0, 0.3); /* 增加背景透明度 */
+        }
         .homeContent {
             display: flex; /* 使用flex布局 */
             flex-direction: column; /* 纵向排列 */
@@ -132,6 +148,105 @@
         color: #333;
         text-align: center; /* 文字居中 */
     }
+
+    section {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 20px;
+        margin: 20px 0;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    }
+    
+
+    .homeContent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px; /* 增加内边距 */
+        background: rgba(255, 255, 255, 0.05); /* 更通透的底色 */
+    }
+    
+
+
+    
+    /* 增强导航栏效果 */
+    #mainNav {
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .navLink {
+        transition: all 0.3s ease;
+        border-radius: 8px;
+        padding: 8px 15px;
+    }
+    
+    .navLink:hover {
+        transform: scale(1.05);
+        background: rgba(255, 255, 255, 0.2);
+    }
+    
+    /* 优化标题效果 */
+    h1, h2, h3 {
+        position: relative;
+        background: linear-gradient(45deg, #4A90E2, #6C5B7B);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: textShine 3s infinite alternate;
+    }
+    
+    @keyframes textShine {
+        from { background-position: 0% 50%; }
+        to { background-position: 100% 50%; }
+    }
+    
+    /* 增强按钮立体感 */
+    .button {
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 12px 24px;
+    }
+    
+    .button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* 优化下拉菜单 */
+    select {
+        background: rgba(0, 0, 0, 0.4) !important;
+        border: 1px solid rgba(255, 255, 255, 0.4) !important;
+        backdrop-filter: blur(5px);
+    }
+    
+    /* 增强图片效果 */
+    .profilePic {
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s ease;
+    }
+    
+    .profilePic:hover {
+        transform: scale(1.03);
+    }
+    
+    /* 优化时间显示 */
+    #clock {
+        font-family: 'Courier New', monospace;
+        text-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
+        font-weight: bold;
+    }
+    
+    /* 工具按钮布局优化 */
+    #tools .contactContent {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        width: 100%;
+    }
 </style>
 
 </head>
@@ -143,178 +258,10 @@
             <li><a href="#portfolio" class="navLink" onclick="scrollToSection('portfolio')">作品集</a></li>
             <li><a href="#contact" class="navLink" onclick="scrollToSection('contact')">联系方式</a></li>
             <li><a href="UpdateLog.html" class="">网站更新日志</a></li>
-            <li><a href="games.html" class="">游戏</a></li>
             <li><a href="Documents.html" target="_blank">文档</a></li>
             <div id="clock" style="text-align: center; font-size: 20px; color: rgb(121, 114, 114); margin-top: 1px;">00:00:00</div>
         </ul>
     </nav>
-
-    <!-- 音乐播放器 -->
-<div class="musicPlayer" id="musicPlayer">
-    <div class="musicPlayerTitleBar">
-        <span class="musicPlayerTitle">音乐播放器</span>
-        <button class="closeButton" onclick="closeMusicPlayer()">X</button>
-    </div>
-    <div class="songInfo">
-        <p id="songTitle"></p>
-    </div>
-    <div class="musicControls">
-        <button onclick="prevSong()">上一曲</button>
-        <button onclick="playAudio()">播放</button>
-        <button onclick="pauseAudio()">暂停</button>
-        <button onclick="nextSong()">下一曲</button>
-    </div>
-    <progress id="progress" class="musicProgress" value="0" max="1"></progress>
-    <div class="timeDisplay">
-        <span id="currentTime">00:00</span> / <span id="totalTime">00:00</span>
-    </div>
-</div>
-
-
-    <script>
-        // 音频播放控制函数
-        const audio = new Audio();
-        const songs = [
-            { title: 'The Hacker', src: 'musics/The Hacker.mp3' },
-            { title: '5-20AM-刀酱--落风', src: 'musics/5-20AM-刀酱--落风.mp3' },
-            { title: 'aLIEz', src: 'musics/aLIEz.mp3' },
-            { title: 'BBC World 2013 Countdown', src: 'musics/BBC World 2013 Countdown.m4a' },
-            { title: 'Better Now-Blanks', src: 'musics/Better Now-Blanks.mp3' },
-            { title: 'China-PiPa', src: 'musics/China-PiPa.mp3' },
-            { title: 'China-x', src: 'musics/China-x.mp3' },
-            { title: 'Cloud 9-Tobu-Itro', src: 'musics/Cloud 9-Tobu-Itro.mp3' },
-            { title: 'Counting Stars', src: 'musics/Counting Stars.mp3' },
-            { title: 'Heaven REmady', src: 'musics/Heaven REmady.mp3' },
-            { title: 'Midnight City-M83', src: 'musics/Midnight City-M83.mp3' },
-            { title: 'Navada' , src: 'musics/Navada.mp3' },
-            { title: 'Never gonna give you up', src: 'musics/Never gonna give you up.m4a' },
-            { title: 'Really Slow Motion - Suns and Stars', src: 'musics/Really Slow Motion - Suns and Stars.mp3' },
-            { title: 'Sea of Tranquility', src: 'musics/Sea of Tranquility.m4a' },
-            { title: 'Seve', src: 'musics/Seve.m4a' },
-            { title: 'Shed a Light-Robin Schulz,David Guetta,Cheat Codes', src: 'musics/Shed a Light-Robin Schulz,David Guetta,Cheat Codes.mp3' },
-            { title: 'Shed a Light', src: 'musics/Shed a Light.mp3' },
-            { title: 'Shots', src: 'musics/Shots.mp3' },
-            { title: 'Sold Out', src: 'musics/Sold Out.mp3' },
-            { title: 'Something Just Like This', src: 'musics/Something Just Like This.mp3' },
-            { title: 'Spring Festival （年味中国）', src: 'musics/Spring Festival （年味中国）.mp3' },
-            { title: 'STAY(Clean) - The Kid LAROI&Justin Bieber', src: 'musics/STAY(Clean) - The Kid LAROI&Justin Bieber.mp3' },
-            { title: 'Sun', src: 'musics/Sun.m4a' },
-            { title: 'Sweet Dreams -Are Made Of This--Eurythmics', src: 'musics/Sweet Dreams -Are Made Of This--Eurythmics.mp3' },
-            { title: 'Turn All The Lights On-T-Pain,Ne-Yo', src: 'musics/Turn All The Lights On-T-Pain,Ne-Yo.mp3' },
-            { title: 'Undead Funeral March-Ugress', src: 'musics/Undead Funeral March-Ugress.mp3' },
-            { title: 'Unwelcome school', src: 'musics/Unwelcome school.m4a' },
-            { title: 'Uptown Funk', src: 'musics/Uptown Funk.mp3' },
-        ];
-        let currentSongIndex = 0;
-
-        // 初始化歌曲
-        function loadSong() {
-            const currentSong = songs[currentSongIndex];
-            audio.src = currentSong.src;
-            document.getElementById('songTitle').textContent = currentSong.title;
-        }
-        loadSong();
-
-        function playAudio() {
-            audio.play();
-        }
-
-        function pauseAudio() {
-            audio.pause();
-        }
-
-        // 切换到上一曲
-        function prevSong() {
-            currentSongIndex--;
-            if (currentSongIndex < 0) {
-                currentSongIndex = songs.length - 1;
-            }
-            loadSong();
-            audio.play();
-        }
-
-        // 切换到下一曲
-        function nextSong() {
-            currentSongIndex++;
-            if (currentSongIndex >= songs.length) {
-                currentSongIndex = 0;
-            }
-            loadSong();
-            audio.play();
-        }
-
-        // 更新进度条
-        audio.addEventListener('timeupdate', () => {
-            const progress = document.getElementById('progress');
-            progress.value = audio.currentTime / audio.duration;
-
-            const currentTimeDisplay = document.getElementById('currentTime');
-            const totalTimeDisplay = document.getElementById('totalTime');
-
-            currentTimeDisplay.textContent = formatTime(audio.currentTime);
-
-            if (!isNaN(audio.duration)) { // 检查总时间是否有效
-                totalTimeDisplay.textContent = formatTime(audio.duration);
-            }
-        });
-
-        // 调整进度
-        const progress = document.getElementById('progress');
-        progress.addEventListener('click', (e) => {
-            const rect = progress.getBoundingClientRect();
-            const offsetX = e.clientX - rect.left;
-            const percentage = offsetX / rect.width;
-            audio.currentTime = percentage * audio.duration;
-        });
-
-        // 格式化时间函数
-        function formatTime(seconds) {
-            const minutes = Math.floor(seconds / 60);
-            const remainingSeconds = Math.floor(seconds % 60);
-            return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
-        }
-
-        // 时钟更新代码
-        function updateClock() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
-        }
-
-        setInterval(updateClock, 1000);
-        updateClock(); // 初始调用以立即显示时间
-    </script>
-
-    <script>
-        function closeMusicPlayer() {
-            const musicPlayer = document.getElementById('musicPlayer');
-            musicPlayer.style.display = 'none'; // 关闭播放器时隐藏它
-        }
-
-        const musicPlayer = document.getElementById('musicPlayer');
-        const musicPlayerTitleBar = document.querySelector('.musicPlayerTitleBar');
-        let isDragging = false;
-        let offsetX, offsetY;
-
-        musicPlayerTitleBar.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            offsetX = e.clientX - musicPlayer.getBoundingClientRect().left;
-            offsetY = e.clientY - musicPlayer.getBoundingClientRect().top;
-        });
-
-        document.addEventListener('mousemove', (e) => {
-            if (isDragging) {
-                musicPlayer.style.left = (e.clientX - offsetX) + 'px';
-                musicPlayer.style.top = (e.clientY - offsetY) + 'px';
-            }
-        });
-
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-        });
-    </script>
 
     <!-- 首页部分 -->
     <section id="home">
@@ -383,7 +330,7 @@
                     <button class="button" onclick="window.location.href=''">邮箱：XEK20090428@163.com</button>   
                 </li>
                 <li style="margin-right: 20px;">
-                    <button class="button" onclick="window.location.href=''">QQ:1635075096</button>
+                    <button class="button" onclick="window.location.href=''">QQ:1635075096或3956978117(小号)</button>
                 </li>
                 <li>
                     <a href="https://space.bilibili.com/3493115711196019" target="_blank" class="button">访问哔哩哔哩主页</a>

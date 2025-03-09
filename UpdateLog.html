@@ -14,6 +14,42 @@
             padding: 0;
         }
         h1 {
+            opacity: 0;
+            transform: translateY(20px); /* 添加初始位置 */
+        }
+        
+        h2 {
+            opacity: 0;
+            transform: translateY(20px); /* 添加初始位置 */
+        }
+        
+        .feature-list {
+            opacity: 0;
+            transform: scale(0.9); /* 添加缩放初始状态 */
+        }
+        
+        @keyframes fadeInUp {
+            from { /* 明确起始状态 */
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes scaleUp {
+            from { /* 明确起始状态 */
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        h1 {
             color: #4A90E2;
             text-align: center;
             margin-bottom: 20px;
