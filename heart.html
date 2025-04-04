@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>星空下的告白</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #000;
+        }
+        #canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+        .input-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 100;
+            text-align: center;
+            transition: opacity 1s;
+        }
+        input {
+            padding: 15px 30px;
+            font-size: 20px;
+            border-radius: 25px;
+            border: 2px solid #ff4081;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            outline: none;
+            margin-bottom: 20px;
+            display: block;
+        }
+        #launchBtn {
+            padding: 12px 40px;
+            font-size: 18px;
+            border-radius: 30px;
+            border: 2px solid #ff4081;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        #launchBtn:hover {
+            background: #ff4081;
+            transform: scale(1.1);
+        }
+        .message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #ff4081;
+            font-size: 40px;
+            font-family: cursive;
+            opacity: 0;
+            transition: 3s;
+            text-shadow: 0 0 10px #ff4081;
+        }
+        .hidden {
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="input-box">
+        <input type="text" id="name" placeholder="请输入你的名字" autocomplete="off">
+        <button id="launchBtn">💖 点击有惊喜 💖</button>
+    </div>
+    <div class="message" id="message"></div>
+    <canvas id="canvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        // 星星背景
+        class Star {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 2;
+                this.opacity = Math.random();
+            }
+            draw() {
+                ctx.fillStyle = `rgba(255,255,255,${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            update() {
+                if(this.opacity < 0) this.opacity = 1;
+                this.opacity -= 0.02;
+            }
+        }
+
+        // 烟花粒子
+        class Particle {
+            constructor(x, y, targetX, targetY, color, type = 'normal') {
+                this.x = x;
+                this.y = y;
+                this.targetX = targetX;
+                this.targetY = targetY;
+                this.color = color;
+                this.type = type;
+                this.speed = Math.random() * 3 + 1;
+                this.size = Math.random() * 2 + 1;
+                this.angle = Math.atan2(targetY - y, targetX - x);
+                
+                // 重力属性
+                this.velocityX = 0;
+                this.velocityY = 0;
+                this.gravity = 0.15;
+                this.resistance = 0.98;
+            }
+            update() {
+                switch(this.type) {
+                    case 'launcher':
+                        this.x += Math.cos(this.angle) * this.speed;
+                        this.y += Math.sin(this.angle) * this.speed;
+                        if(Math.abs(this.y - this.targetY) < 5) {
+                            this.createHeartExplosion();
+                            return false;
+                        }
+                        break;
+                        
+                    case 'heart':
+                        this.velocityY += this.gravity;
+                        this.x += this.velocityX;
+                        this.y += this.velocityY;
+                        this.velocityX *= this.resistance;
+                        this.velocityY *= this.resistance;
+                        this.size *= 0.97;
+                        break;
+                        
+                    default:
+                        this.x += Math.cos(this.angle) * this.speed;
+                        this.y += Math.sin(this.angle) * this.speed;
+                        this.size *= 0.97;
+                }
+                return true;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            createHeartExplosion() {
+                const heartPoints = createHeart(this.x, this.y, 15);
+                heartPoints.forEach(point => {
+                    const angle = Math.atan2(point.y - this.y, point.x - this.x);
+                    const speed = Math.random() * 4 + 2;
+                    const p = new Particle(
+                        this.x, this.y,
+                        point.x, point.y,
+                        `hsl(${Math.random()*60 + 300}, 70%, 60%)`,
+                        'heart'
+                    );
+                    p.velocityX = Math.cos(angle) * speed;
+                    p.velocityY = Math.sin(angle) * speed;
+                    particles.push(p);
+                });
+            }
+        }
+
+        // 初始化
+        let stars = Array(200).fill().map(() => new Star());
+        let particles = [];
+
+        // 心形坐标生成
+        function createHeart(x, y, size) {
+            const points = [];
+            for(let t = 0; t < Math.PI * 2; t += 0.1) {
+                const px = size * (16 * Math.pow(Math.sin(t), 3));
+                const py = -size * (13 * Math.cos(t) - 5*Math.cos(2*t) - 2*Math.cos(3*t) - Math.cos(4*t));
+                points.push({x: x + px, y: y + py});
+            }
+            return points;
+        }
+
+        // 创建文字粒子
+        function createTextParticles(text, x, y) {
+            ctx.font = "80px Arial";
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            
+            const textWidth = ctx.measureText(text).width;
+            const tempCanvas = document.createElement('canvas');
+            const tempCtx = tempCanvas.getContext('2d');
+            
+            tempCanvas.width = textWidth + 100;
+            tempCanvas.height = 100;
+            tempCtx.font = "80px Arial";
+            tempCtx.fillStyle = "#ff4081";
+            tempCtx.textAlign = "center";
+            tempCtx.fillText(text, tempCanvas.width/2, 60);
+
+            const pixels = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height).data;
+            
+            for(let i=0; i<pixels.length; i+=4) {
+                if(pixels[i+3] > 128) {
+                    const px = (i/4) % tempCanvas.width;
+                    const py = Math.floor((i/4)/tempCanvas.width);
+                    particles.push(new Particle(
+                        x - textWidth/2 + px,
+                        y - 40 + py,
+                        x - textWidth/2 + px,
+                        y - 40 + py,
+                        `hsl(${Math.random()*60 + 300}, 70%, 60%)`
+                    ));
+                }
+            }
+        }
+
+        // 动画循环
+        function animate() {
+            ctx.fillStyle = 'rgba(0,0,0,0.1)';
+            ctx.fillRect(0,0,width,height);
+
+            stars.forEach(star => {
+                star.draw();
+                star.update();
+            });
+
+            particles.forEach((particle, index) => {
+                if(!particle.update()) {
+                    particles.splice(index, 1);
+                    return;
+                }
+                particle.draw();
+                if(particle.size < 0.3) particles.splice(index, 1);
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        // 事件处理
+        function hideInputBox() {
+            const inputBox = document.querySelector('.input-box');
+            inputBox.classList.add('hidden');
+            setTimeout(() => {
+                inputBox.style.display = 'none';
+            }, 1000);
+        }
+
+        // 修改回车事件处理
+        document.querySelector('input').addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') {
+                const name = e.target.value;
+                if(!name) return;
+                
+                hideInputBox();
+                document.getElementById('message').textContent = `我喜欢你，${name}！`;
+                document.getElementById('message').style.opacity = 1;
+        
+                // 添加按钮点击的烟花效果
+                for(let i = 0; i < 50; i++) {
+                    const startX = width/2 + (Math.random() - 0.5) * 200;
+                    const particle = new Particle(
+                        startX, height,
+                        startX, height/2,
+                        `hsl(${Math.random()*60 + 200}, 70%, 50%)`,
+                        'launcher'
+                    );
+                    particles.push(particle);
+                }
+        
+                // 原有心形粒子效果
+                const heartPoints = createHeart(width/2, height/2, 15);
+                heartPoints.forEach(point => {
+                    particles.push(new Particle(
+                        width/2, height/2,
+                        point.x, point.y,
+                        `hsl(${Math.random()*60 + 300}, 70%, 50%)`
+                    ));
+                });
+        
+                // 合并文字效果
+                setTimeout(() => {
+                    createTextParticles(`I LOVE ${name.toUpperCase()}`, width/2, height/2 + 150);
+                    createTextParticles(`${name}，做我女朋友好吗？`, width/2, height/2 + 250);
+                }, 2000);
+            }
+        });
+        
+        // 修改按钮点击事件处理
+        document.getElementById('launchBtn').addEventListener('click', (e) => {
+            const name = document.getElementById('name').value;
+            if(!name) {
+                alert('请先输入你的名字');
+                return;
+            }
+        
+            hideInputBox();
+            document.getElementById('message').textContent = `${name}，你愿意和我在一起吗？`;
+            document.getElementById('message').style.opacity = 1;
+        
+            // 原有发射粒子效果
+            for(let i = 0; i < 50; i++) {
+                const startX = width/2 + (Math.random() - 0.5) * 200;
+                const particle = new Particle(
+                    startX, height,
+                    startX, height/2,
+                    `hsl(${Math.random()*60 + 200}, 70%, 50%)`,
+                    'launcher'
+                );
+                particles.push(particle);
+            }
+        
+            // 添加回车事件的心形效果
+            const heartPoints = createHeart(width/2, height/2, 15);
+            heartPoints.forEach(point => {
+                particles.push(new Particle(
+                    width/2, height/2,
+                    point.x, point.y,
+                    `hsl(${Math.random()*60 + 300}, 70%, 50%)`
+                ));
+            });
+        
+            // 合并文字效果
+            setTimeout(() => {
+                createTextParticles(`I LOVE ${name.toUpperCase()}`, width/2, height/2 + 150);
+                createTextParticles(`${name}，做我女朋友好吗？`, width/2, height/2 + 250);
+            }, 2000);
+        });
+
+        // 初始化动画
+        animate();
+
+        // 窗口调整
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            stars = Array(200).fill().map(() => new Star());
+        });
+    </script>
+</body>
+</html>
