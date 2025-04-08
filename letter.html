@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>致最美丽的你</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: #000;
+            font-family: 'Microsoft YaHei', sans-serif;
+            touch-action: manipulation;
+            position: relative;
+            color: #fff; /* 设置全局文字颜色为白色，以便在黑色背景上显示 */
+        }
+    
+        #canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* 确保画布在信封的后面 */
+        }
+    
+        .envelope {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 320px;
+  height: 480px;
+  background: linear-gradient(45deg, #fffdfa 0%, #f8f4f0 100%);
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 2s ease-out;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  border-radius: 12px;
+  padding: 30px;
+  z-index: 2;
+}
+
+.content {
+    position: relative;
+    top: -10px;
+  font-family: '楷体', cursive;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #5a463c;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+    
+        .content.show {
+            display: block;
+        }
+    
+        /* 信封动画效果 */
+        @keyframes envelopeAnimation {
+  0% { transform: translate(-50%, -50%) scale(0); }
+  60% { transform: translate(-50%, -50%) scale(1.1); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+    
+        .envelope.open {
+            animation: envelopeAnimation 2s ease-out forwards;
+        }
+    </style>
+    
+    <body>
+        <canvas id="canvas"></canvas>
+        <div id="envelope" class="envelope">
+            <div id="letterContent" class="content">
+                <!-- 这里添加信件正文内容 -->
+                <p>致最美丽温柔的你：</p>
+                <p>     虽然我们相识的时间比较短，但那我可以认真地对你说，从见到你的第一眼，你就走进了我的心里。或许是我那比较傻吧，自从我们分班过后，我还一直记挂着你，一直在回忆我们之间的点滴滴，在这里我想对你说：“抱歉，是我的失礼，是我不够好”是我的懦弱让我一直不敢说我喜欢你，所以，你能给我一个机会吗？我会一直陪着你走过这路上的坎坷，泥泞，相信我，好吗？</p>
+            <p>————真心爱你的微不足道的人<p>
+            </div>
+        </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let [width, height] = [window.innerWidth, window.innerHeight];
+        [canvas.width, canvas.height] = [width, height];
+
+        // 定义配置变量
+        const CONFIG = {
+            STAR: {
+                COUNT: 500, // 星星的数量
+                OPACITY_SPEED: 0.01 // 星星透明度的变化速度
+            }
+        };
+
+        // 星空背景系统
+        class StarBackground {
+            constructor() {
+                this.stars = Array(CONFIG.STAR.COUNT).fill().map(() => this.createStar());
+            }
+
+            createStar() {
+                return {
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    size: Math.random() * 2,
+                    opacity: Math.random(),
+                    update: function() {
+                        this.opacity = this.opacity < 0 ? 1 : this.opacity - CONFIG.STAR.OPACITY_SPEED;
+                    },
+                    draw: function() {
+                        ctx.fillStyle = `rgba(255,255,255,${this.opacity})`;
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                };
+            }
+
+            animate() {
+                ctx.clearRect(0, 0, width, height); // 清除上一帧内容
+                this.stars.forEach(star => {
+                    star.update();
+                    star.draw();
+                });
+                requestAnimationFrame(() => this.animate());
+            }
+        }
+
+        // 初始化星空背景
+        const starBackground = new StarBackground();
+        starBackground.animate();
+
+        // 信封动画
+        window.onload = function() {
+            document.getElementById('envelope').classList.add('open');
+            setTimeout(function() {
+                document.getElementById('letterContent').classList.add('show');
+            }, 2000); // 2秒后显示信件内容
+        };
+    </script>
+</body>
+</html>
