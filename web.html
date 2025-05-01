@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>SYSTEM-MEMZ-XEK开源的C#项目</title>
+    <title>SYSTEM-MEMZ-XEK开源的网页项目</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         :root {
@@ -98,7 +98,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>C# 开源项目集</h1>
+        <h1>网页开源项目集</h1>
         
         <!-- 添加搜索框 -->
         <input type="text" 
@@ -136,10 +136,11 @@
                 );
 
                 const csharpRepos = reposWithReleases.filter(repo => 
-                    repo.language === 'C#' && 
-                    !repo.archived && 
-                    !repo.fork
-                );
+                (repo.language === 'HTML' || repo.language === 'CSS' || repo.language === 'Javascript') && 
+                !repo.archived && 
+                !repo.fork
+            );
+
 
                 displayProjects(csharpRepos);
             } catch (error) {
@@ -153,7 +154,7 @@
             container.innerHTML = '';
             
             if (repos.length === 0) {
-                container.innerHTML = '<p>暂无C#开源项目</p>';
+                container.innerHTML = '<p>暂无网页开源项目</p>';
                 return;
             }
 
@@ -164,7 +165,7 @@
                     <h3>${repo.name}</h3>
                     <p>${repo.description || '暂无项目描述'}</p>
                     <div class="stats">
-                        <span class="language-csharp">C#</span>
+                        <span class="language-csharp">HTML</span>
                         <span>⭐ ${repo.stargazers_count}</span>
                         <span>📅 ${new Date(repo.updated_at).toLocaleDateString()}</span>
                     </div>

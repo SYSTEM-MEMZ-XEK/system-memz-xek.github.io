@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>SYSTEM-MEMZ-XEK开源的C#项目</title>
+    <title>SYSTEM-MEMZ-XEK开源的Python项目</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         :root {
@@ -98,7 +98,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>C# 开源项目集</h1>
+        <h1>Python开源项目集</h1>
         
         <!-- 添加搜索框 -->
         <input type="text" 
@@ -136,7 +136,7 @@
                 );
 
                 const csharpRepos = reposWithReleases.filter(repo => 
-                    repo.language === 'C#' && 
+                    repo.language === 'Python' && 
                     !repo.archived && 
                     !repo.fork
                 );
@@ -153,7 +153,7 @@
             container.innerHTML = '';
             
             if (repos.length === 0) {
-                container.innerHTML = '<p>暂无C#开源项目</p>';
+                container.innerHTML = '<p>暂无Python开源项目</p>';
                 return;
             }
 

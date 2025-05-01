@@ -219,6 +219,25 @@
         position: relative;
     }
 
+    .service-button {
+    display: block;
+    width: 80%;
+    margin: 1rem auto 0;
+    padding: 0.8rem;
+    background: #6e40c9;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    }
+            
+    .service-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(110,64,201,0.3);
+    }
+    </style>
+
     .footer {
         background: var(--primary-color);
         color: white;
@@ -253,6 +272,7 @@
                 <li>部署上线支持</li>
                 <li>待学习......</li>
             </ul>
+            <a href="web.html" class="service-button">查看网页开源项目</a>
         </div>
 
         <div class="card">
@@ -267,26 +287,6 @@
             </ul>
             <a href="Csharp.html" class="service-button">查看C#开源项目</a>
         </div>
-        <style>
-            .service-button {
-                display: block;
-                width: 80%;
-                margin: 1rem auto 0;
-                padding: 0.8rem;
-                background: #6e40c9;
-                color: white;
-                text-align: center;
-                text-decoration: none;
-                border-radius: 5px;
-                transition: transform 0.2s, box-shadow 0.2s;
-            }
-            
-            .service-button:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 3px 8px rgba(110,64,201,0.3);
-            }
-            </style>
-
         <div class="card">
             <h2><i class="fab fa-python"></i> Python开发</h2>
             <div class="badge">技术不太成熟，有风险，三思而后行</div>
@@ -296,6 +296,7 @@
                 <li>简单应用</li>
                 <li>待学习......</li>
             </ul>
+            <a href="Python.html" class="service-button">查看Python开源项目</a>
         </div>
 
     </section>
