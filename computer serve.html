@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>专业装机与系统安装</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', system-ui;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .service-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            transition: transform 0.3s;
+            border: 2px solid var(--secondary-color);
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        .price {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin: 1rem 0;
+        }
+        .footer {
+        background: var(--primary-color);
+        color: white;
+        text-align: center;
+        padding: 2.2rem;
+        margin-top: 3rem;
+        font-size: 0.9em;
+    }
+        .disclaimer {
+            background: #f8f9fa;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 1200px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .disclaimer h3 {
+            color: var(--accent-color);
+            margin-top: 0;
+        }
+
+        .disclaimer-list {
+            padding-left: 1.5rem;
+            margin: 1rem 0;
+        }
+
+
+        @media (max-width: 768px) {
+            .service-container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>极速电脑服务</h1>
+        <p>专业配置 | 快速装机 | 系统优化</p>
+    </header>
+    <div class="service-container">
+        <div class="service-card">
+            <h2><i class="fas fa-cogs"></i> 硬件配置方案</h2>
+            <div class="price">¥20</div>
+            <p>根据需求定制最佳硬件配置方案，包含：</p>
+            <ul>
+                <li>电脑硬件推荐</li>
+                <li>推荐性价比硬件</li>
+                <li>有常规配置（推荐）垃圾佬配置（慎选）</li>
+            </ul>
+        </div>
+
+        <div class="service-card">
+            <h2><i class="fas fa-toolbox"></i> 专业装机服务</h2>
+            <div class="price">¥60</div>
+            <p>包含：</p>
+            <ul>
+                <li>硬件安装</li>
+                <li>上门服务</li>
+                <li>硬件升级</li>
+            </ul>
+        </div>
+
+        <div class="service-card">
+            <h2><i class="fas fa-download"></i> 系统安装服务</h2>
+            <div class="price">¥50</div>
+            <p>包含：</p>
+            <ul>
+                <li>Windows 7/8/10/11 安装</li>
+                <li>全套硬件驱动安装</li>
+                <li>基础系统优化</li>
+            </ul>
+        </div>
+
+        <div class="service-card">
+            <h2><i class="fas fa-box"></i> 软件代安装</h2>
+            <div class="price">¥5/个</div>
+            <p>支持：</p>
+            <ul>
+                <li>常用软件安装</li>
+                <li>游戏安装</li>
+                <li>办公软件安装</li>
+            </ul>
+        </div>
+    </div>
+        <p style="margin-top: 3rem;text-align: center;font-size: 1.2rem;color: #666;">服务时间：每周六、日 9:00-21:00</p>
+    </div>
+    <div class="disclaimer">
+        <h3>服务须知</h3>
+        <p>若您需要装机服务，请先付款，并且根据配置单购买相应的硬件，请勿擅自修改配置。</p>
+        <p>若您擅自操作设备导致故障，本人不负责，在服务后1年的时间里可以提供免费维修服务，超过1年的故障需要您另行支付维修费用20元/次。</p>
+        <p>禁止使用侮辱性语言攻击技术人员，否则终止服务。</p>
+        <p>若您对硬件配置、软件安装、系统优化等有任何疑问，请及时联系我，如果你自己不懂电脑，请不要以你自己以为的来对服务过程指指点点，否则终止服务。</p>
+        <p>不接受装机完成后的主观感受退货，但可以更改配置。</p>
+    </div>
+<footer class="footer">
+    <p>Copyright &copy; 2024-2025 <p>
+    <p>SYSTEM-MEMZ-XEK. 保留所有权利</p>
+</footer>
+</body>
+</html>
