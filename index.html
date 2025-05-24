@@ -6,194 +6,20 @@
     <title>SYSTEM-MEMZ-XEK的个人网站</title>
     <link rel="icon" href="images/profile.jpg" type="image/x-icon"> <!-- 添加图标 -->
     <link rel="stylesheet" href="css/style.css">
-    <style>
-            /* 优化后的打字动画 */
-            #typingContainer {
-            position: relative;
-            display: inline-block;
-        }
-
-        #cursor {
-            display: inline-block;
-            width: 3px;
-            height: 1.2em;
-            background-color: #4A90E2;
-            animation: blink-caret 1s step-end infinite;
-            vertical-align: text-bottom;
-            margin-left: 2px;
-        }
-
-        @keyframes blink-caret {
-            from, to { opacity: 0; }
-            50% { opacity: 1; }
-        }
-    /* 增强格言显示效果 */
-    #quoteDisplay {
-        margin: 25px 0;
-        font-size: 1.2em;
-        min-height: 40px;
-        position: relative;
-        transition: opacity 0.8s ease-in-out;
-    }
-
-    .quote-enter {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    .quote-enter-active {
-        opacity: 1;
-        transform: translateY(0);
-        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-
-
-        body {
-            background: url('images/background.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: white; /* 修改为白色 */
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        .button {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white; /* 新增文字颜色 */
-            transition: all 0.3s ease;
-        }
-
-        select {
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            color: white; /* 新增文字颜色 */
-            background: rgba(0, 0, 0, 0.3); /* 增加背景透明度 */
-        }
-
-        .homeContent {
-            display: flex; /* 使用flex布局 */
-            flex-direction: column; /* 纵向排列 */
-            align-items: center; /* 居中对齐 */
-            padding-top: 80px; /* 上边距，避免被导航条遮挡 */
-        }
-
-        .profilePic {
-            max-width: 100%; /* 最大宽度为100% */
-            height: auto; /* 高度自适应 */
-            margin-top: 20px; /* 上边距 */
-            border-radius: 50%; /* 圆形头像 */
-        }
-
-
-        section {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-        }
-
-        .homeContent {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 30px; /* 增加内边距 */
-            background: rgba(255, 255, 255, 0.05); /* 更通透的底色 */
-        }
-
-        /* 增强导航栏效果 */
-        #mainNav {
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .navLink {
-            transition: all 0.3s ease;
-            border-radius: 8px;
-            padding: 8px 15px;
-        }
-
-        .navLink:hover {
-            transform: scale(1.05);
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* 优化标题效果 */
-        h1, h2, h3 {
-            position: relative;
-            background: linear-gradient(45deg, #4A90E2, #6C5B7B);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: textShine 3s infinite alternate;
-        }
-
-        @keyframes textShine {
-            from { background-position: 0% 50%; }
-            to { background-position: 100% 50%; }
-        }
-
-        /* 增强按钮立体感 */
-        .button {
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 12px 24px;
-        }
-
-        .button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        /* 优化下拉菜单 */
-        select {
-            background: rgba(0, 0, 0, 0.4) !important;
-            border: 1px solid rgba(255, 255, 255, 0.4) !important;
-            backdrop-filter: blur(5px);
-        }
-
-        /* 增强图片效果 */
-        .profilePic {
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
-        }
-
-        .profilePic:hover {
-            transform: scale(1.03);
-        }
-
-        /* 优化时间显示 */
-        #clock {
-            font-family: 'Courier New', monospace;
-            text-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
-            font-weight: bold;
-        }
-
-        /* 工具按钮布局优化 */
-        #tools .contactContent {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            width: 100%;
-        }
-
-        .footer {
-        background: var(--primary-color);
-        color: white;
-        text-align: center;
-        padding: 1.5rem;
-        margin-top: 3rem;
-        font-size: 0.9em;
-        }
-</style>
-    </style>
+    <link rel="background" href="images/background.jpg">
 </head>
+<style>
+    body {
+        background: url('images/background.jpg') no-repeat center center fixed;
+        background-size: cover;
+        color: white; /* 修改为白色 */
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+</style>
+
 <body>
     <!-- 导航栏 -->
     <nav id="mainNav">
@@ -213,6 +39,7 @@
                 <span id="typingEffect"></span>
                 <span id="cursor"></span>
             </h1>
+            <p id="viewCount"></p>
             <p>在这里你可以了解更多关于我、我的技能以及我的工作内容。</p>
             <h2>格言：</h2>
             <div id="quoteDisplay"></div>
@@ -221,7 +48,7 @@
             <!-- 关于我部分内容 -->
             <h2>关于我</h2>
             <p>我的名字是SYSTEM-MEMZ-XEK,我是一位高中生，目前就读于炳辉中学。我热爱编程与计算机，喜欢研究新技术，学习新知识。我希望通过我的技能和经验为更多的人提供帮助。</p>
-        </div>
+            
     </section>
 
     <!-- 作品集部分 -->
@@ -241,7 +68,6 @@
                     <option value="https://player.bilibili.com/player.html?bvid=BV14m4y1W765">安装从网上随便下载的WindowsXP sp3会怎么样？</option>
                     <option value="https://player.bilibili.com/player.html?bvid=BV1d3XhYnEWe">U盘文件复制器</option>
                     <option value="https://player.bilibili.com/player.html?bvid=BV1bLQaYCEoA">Windows11安装程序4.0</option>
-                    
                 </select>
             </div>
             <div class="iframe-container" style="margin-top: 20px;">
@@ -249,7 +75,48 @@
                 <iframe id="videoPlayer" src="https://player.bilibili.com/player.html?bvid=BV1V8411o7bt" width="100%" height="600" style="border: none;"></iframe>
             </div>
         </div>
-       <script>
+    </section>
+    
+    <!-- 工具部分 -->   
+    <section id="tools">
+        <h2 style="text-align: center;">工具网站</h2>
+        <div class="contactContent" style="display: flex; flex-direction: column; align-items: center;">
+            <p>这里是我收藏的工具网站，你可以点击按钮来访问。</p>
+            <div style="display: flex; flex-direction: row; align-items: center; margin-top: 20px;">
+                <button class="button" style="margin: 0 10px;" onclick="window.location.href='https://www.remove.bg/zh'">在线图片处理工具</button>
+                <button class="button" style="margin: 0 10px;" onclick="window.location.href='https://www.geogebra.org/graphing?lang=zh_CN'">函数绘制工具</button>
+                <button class="button" style="margin: 0 10px;" onclick="window.location.href='https://www.desmos.com/scientific?lang=zh-CN'">数学计算器</button>
+                <button class="button" style="margin: 0 10px;" onclick="window.location.href='https://openi.cn/#term-8151'">AI工具</button>
+                <button class="button" style="margin: 0 10px;" onclick="window.location.href='https://www.gequbao.com/'">音乐下载</button>
+                <button class="button" style="margin: 0 10px;" onclick="window.location.href='heart.html'">星空下的表白</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 联系方式部分 -->
+    <section id="contact">
+        <h2>联系方式</h2>
+        <div class="contactContent" style="display: flex; flex-direction: column; align-items: center;">
+            <p>你可以通过以下方式联系我：</p>
+            <ul style="display: flex; list-style-type: none; padding: 0; margin: 0; justify-content: center;">
+                <li style="margin-right: 20px;">
+                    <button class="button" onclick="window.location.href=''">邮箱：XEK20090428@163.com</button>
+                </li>
+                <li style="margin-right: 20px;">
+                    <button class="button" onclick="window.location.href=''">QQ:1635075096或3956978117(小号)</button>
+                </li>
+                <li>
+                    <a href="https://space.bilibili.com/3493115711196019" target="_blank" class="button">访问哔哩哔哩主页</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <footer class="footer">
+        <p>Copyright &copy; 2024-2025 <p>
+        <p>SYSTEM-MEMZ-XEK. 保留所有权利</p>
+    </footer>
+
+    <script>
     function changeVideo() {
         var select = document.getElementById("videoSelect");
         var iframe = document.getElementById("videoPlayer");
@@ -292,6 +159,9 @@
 
         // 保持原有的格言显示功能
         displayQuotes();
+
+        // 更新浏览次数
+        updateViewCount();
     }
 
     // 格言循环显示
@@ -320,47 +190,15 @@
             }, 500);
         }, 5000);
     }
+
+    // 更新浏览次数
+    function updateViewCount() {
+        let count = localStorage.getItem('viewCount') || 0;
+        count = parseInt(count) + 1;
+        localStorage.setItem('viewCount', count);
+        document.getElementById('viewCount').innerText = `浏览量 ${count} `;
+    }
 </script>
 
-    </section>
-    
-    <!-- 工具部分 -->   
-    <section id="tools">
-        <h2 style="text-align: center;">工具网站</h2>
-        <div class="contactContent" style="display: flex; flex-direction: column; align-items: center;">
-            <p>这里是我收藏的工具网站，你可以点击按钮来访问。</p>
-            <div style="display: flex; flex-direction: row; align-items: center; margin-top: 20px;">
-                <button class="button" style="margin: 0 10px;" onclick="window.location.href='https://www.remove.bg/zh'">在线图片处理工具</button>
-                <button class="button" style="margin: 0 10px;" onclick="window.location.href='https://www.geogebra.org/graphing?lang=zh_CN'">函数绘制工具</button>
-                <button class="button" style="margin: 0 10px;" onclick="window.location.href='https://www.desmos.com/scientific?lang=zh-CN'">数学计算器</button>
-                <button class="button" style="margin: 0 10px;" onclick="window.location.href='https://openi.cn/#term-8151'">AI工具</button>
-                <button class="button" style="margin: 0 10px;" onclick="window.location.href='https://www.gequbao.com/'">音乐下载</button>
-                <button class="button" style="margin: 0 10px;" onclick="window.location.href='heart.html'">星空下的表白</button>
-            </div>
-        </div>
-    </section>
-    
-    <!-- 联系方式部分 -->
-    <section id="contact">
-        <h2>联系方式</h2>
-        <div class="contactContent" style="display: flex; flex-direction: column; align-items: center;">
-            <p>你可以通过以下方式联系我：</p>
-            <ul style="display: flex; list-style-type: none; padding: 0; margin: 0; justify-content: center;">
-                <li style="margin-right: 20px;">
-                    <button class="button" onclick="window.location.href=''">邮箱：XEK20090428@163.com</button>
-                </li>
-                <li style="margin-right: 20px;">
-                    <button class="button" onclick="window.location.href=''">QQ:1635075096或3956978117(小号)</button>
-                </li>
-                <li>
-                    <a href="https://space.bilibili.com/3493115711196019" target="_blank" class="button">访问哔哩哔哩主页</a>
-                </li>
-            </ul>
-        </div>
-    </section>
-    <footer class="footer">
-        <p>Copyright &copy; 2024-2025 <p>
-        <p>SYSTEM-MEMZ-XEK. 保留所有权利</p>
-    </footer>
 </body>
 </html>

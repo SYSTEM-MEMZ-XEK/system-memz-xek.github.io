@@ -1,4 +1,4 @@
-/* 全局样式 */
+
 :root {
     --main-bg-color: rgba(238, 242, 243, 0.9); /* 更改为带透明度的颜色以实现毛玻璃效果 */
     --nav-bg-color: rgba(51, 51, 51, 0.8); /* 毛玻璃效果的深色背景 */
@@ -87,47 +87,6 @@ h1, h2, h3 {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 添加头像阴影 */
 }
 
-/* 技能列表 */
-.skillsList {
-    display: flex;
-    flex-wrap: wrap; /* 让技能项支持换行 */
-    justify-content: center; /* 居中排列技能项 */
-}
-
-.skillsList li {
-    background-color: #555;  /* 深色技能项 */
-    color: #fff;
-    padding: 12px 15px;  /* 加大内边距 */
-    margin: 8px;  /* 增加边距 */
-    border-radius: 5px;
-    transition: transform 0.3s, background-color 0.3s; /* 添加悬浮效果和过渡 */
-}
-
-.skillsList li:hover {
-    transform: translateY(-3px);  /* 悬停效果 */
-    background-color: #666;  /* 悬停时更换背景色 */
-}
-
-/* 表单样式 */
-input[type="submit"] {
-    background-color: #666;  /* 深色背景 */
-    color: white;
-    padding: 12px 25px;  /* 加大内边距 */
-    border: none;
-    border-radius: 5px;  /* 圆角 */
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s;  /* 平滑过渡 */
-}
-
-input[type="submit"]:hover {
-    background-color: #888;  /* 悬浮颜色 */
-    transform: translateY(-2px);  /* 悬停提升效果 */
-}
-
-input[type="submit"]:active {
-    transform: perspective(500px) rotateX(10deg); /* 点击时倾斜效果 */
-    background-color: #555; /* 点击时更深色 */
-}
 
 form {
     background-color: rgba(248, 249, 250, 0.9);  /* 更淡的灰色背景 */
@@ -201,3 +160,181 @@ form:hover {
         width: 100%; /* 提交按钮全宽 */
     }
 }
+
+            /* 优化后的打字动画 */
+            #typingContainer {
+            position: relative;
+            display: inline-block;
+        }
+
+        #cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2em;
+            background-color: #4A90E2;
+            animation: blink-caret 1s step-end infinite;
+            vertical-align: text-bottom;
+            margin-left: 2px;
+        }
+
+        @keyframes blink-caret {
+            from, to { opacity: 0; }
+            50% { opacity: 1; }
+        }
+    /* 增强格言显示效果 */
+    #quoteDisplay {
+        margin: 25px 0;
+        font-size: 1.2em;
+        min-height: 40px;
+        position: relative;
+        transition: opacity 0.8s ease-in-out;
+    }
+
+    .quote-enter {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .quote-enter-active {
+        opacity: 1;
+        transform: translateY(0);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+
+        
+
+        .button {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white; /* 新增文字颜色 */
+            transition: all 0.3s ease;
+        }
+
+        select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            color: white; /* 新增文字颜色 */
+            background: rgba(0, 0, 0, 0.3); /* 增加背景透明度 */
+        }
+
+        .homeContent {
+            display: flex; /* 使用flex布局 */
+            flex-direction: column; /* 纵向排列 */
+            align-items: center; /* 居中对齐 */
+            padding-top: 80px; /* 上边距，避免被导航条遮挡 */
+        }
+
+        .profilePic {
+            max-width: 100%; /* 最大宽度为100% */
+            height: auto; /* 高度自适应 */
+            margin-top: 20px; /* 上边距 */
+            border-radius: 50%; /* 圆形头像 */
+        }
+
+
+        section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+
+        .homeContent {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px; /* 增加内边距 */
+            background: rgba(255, 255, 255, 0.05); /* 更通透的底色 */
+        }
+
+        /* 增强导航栏效果 */
+        #mainNav {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .navLink {
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            padding: 8px 15px;
+        }
+
+        .navLink:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* 优化标题效果 */
+        h1, h2, h3 {
+            position: relative;
+            background: linear-gradient(45deg, #4A90E2, #6C5B7B);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: textShine 3s infinite alternate;
+        }
+
+        @keyframes textShine {
+            from { background-position: 0% 50%; }
+            to { background-position: 100% 50%; }
+        }
+
+        /* 增强按钮立体感 */
+        .button {
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 12px 24px;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 优化下拉菜单 */
+        select {
+            background: rgba(0, 0, 0, 0.4) !important;
+            border: 1px solid rgba(255, 255, 255, 0.4) !important;
+            backdrop-filter: blur(5px);
+        }
+
+        /* 增强图片效果 */
+        .profilePic {
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .profilePic:hover {
+            transform: scale(1.03);
+        }
+
+        /* 优化时间显示 */
+        #clock {
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
+            font-weight: bold;
+        }
+
+        /* 工具按钮布局优化 */
+        #tools .contactContent {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
+        .footer {
+        background: var(--primary-color);
+        color: white;
+        text-align: center;
+        padding: 1.5rem;
+        margin-top: 3rem;
+        font-size: 0.9em;
+        }
