@@ -3,590 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SYSTEM-MEMZ-XEK的个人网站</title>
+    <title>XEKernel的个人网站</title>
     <link rel="icon" href="images/profile.jpg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #4A90E2;
-            --secondary-color: #6C5B7B;
-            --accent-color: #C06C84;
-            --text-light: #ffffff;
-            --text-dark: #333333;
-            --bg-transparent: rgba(255, 255, 255, 0.1);
-            --bg-dark: rgba(0, 0, 0, 0.6);
-            --transition: all 0.3s ease;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            color: var(--text-light);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
-            min-height: 100vh;
-        }
-
-        /* 粒子背景容器 */
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-        }
-
-        /* 导航栏样式 */
-        nav {
-            background: var(--bg-dark);
-            backdrop-filter: blur(10px);
-            padding: 15px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            transition: var(--transition);
-        }
-
-        nav.scrolled {
-            padding: 10px 0;
-            background: rgba(0, 0, 0, 0.8);
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        nav ul li {
-            margin: 0 10px;
-        }
-
-        nav ul li a {
-            color: var(--text-light);
-            text-decoration: none;
-            padding: 8px 16px;
-            border-radius: 30px;
-            transition: var(--transition);
-            font-weight: 500;
-            display: block;
-        }
-
-        nav ul li a:hover,
-        nav ul li a.active {
-            background: var(--primary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        /* 主要内容区域 */
-        section {
-            padding: 100px 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .section-content {
-            max-width: 1200px;
-            width: 100%;
-            background: var(--bg-transparent);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: var(--transition);
-        }
-
-        .section-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-        }
-
-        h1, h2, h3 {
-            margin-bottom: 20px;
-            text-align: center;
-            position: relative;
-        }
-
-        h1 {
-            font-size: 3rem;
-            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 30px;
-        }
-
-        h2 {
-            font-size: 2.2rem;
-            color: var(--text-light);
-            padding-bottom: 15px;
-            margin-bottom: 30px;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
-            border-radius: 3px;
-        }
-
-        h3 {
-            font-size: 1.5rem;
-            color: var(--text-light);
-        }
-
-        p {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        /* 首页样式 */
-        #home {
-            text-align: center;
-        }
-
-        .homeContent {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        #typingContainer {
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        #cursor {
-            display: inline-block;
-            width: 3px;
-            height: 1.2em;
-            background-color: var(--primary-color);
-            animation: blink-caret 1s step-end infinite;
-            vertical-align: text-bottom;
-            margin-left: 2px;
-        }
-
-        @keyframes blink-caret {
-            from, to { opacity: 0; }
-            50% { opacity: 1; }
-        }
-
-        .profilePic {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 30px 0;
-            border: 5px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            transition: var(--transition);
-        }
-
-        .profilePic:hover {
-            transform: scale(1.05);
-            border-color: var(--primary-color);
-        }
-
-        #quoteDisplay {
-            margin: 40px 0;
-            font-size: 1.3rem;
-            font-style: italic;
-            padding: 20px;
-            background: var(--bg-dark);
-            border-radius: 15px;
-            max-width: 800px;
-            position: relative;
-            transition: opacity 0.8s ease-in-out;
-        }
-
-        #quoteDisplay::before,
-        #quoteDisplay::after {
-            content: '"';
-            font-size: 2rem;
-            color: var(--primary-color);
-            position: absolute;
-        }
-
-        #quoteDisplay::before {
-            top: 10px;
-            left: 15px;
-        }
-
-        #quoteDisplay::after {
-            bottom: 10px;
-            right: 15px;
-        }
-
-        /* 作品集样式 */
-        .portfolioContent {
-            width: 100%;
-        }
-
-        .video-selector {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-        }
-
-        #videoSelect {
-            padding: 12px 20px;
-            font-size: 1rem;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            background: var(--bg-dark);
-            color: var(--text-light);
-            width: 100%;
-            max-width: 500px;
-            backdrop-filter: blur(5px);
-        }
-
-        .iframe-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-
-        #videoPlayer {
-            width: 100%;
-            max-width: 900px;
-            height: 500px;
-            border: none;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        /* GitHub项目样式 */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-            width: 100%;
-            margin-top: 30px;
-        }
-
-        .project-card {
-            background: var(--bg-dark);
-            border-radius: 15px;
-            padding: 25px;
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            border-color: var(--primary-color);
-        }
-
-        .project-card h3 {
-            margin-bottom: 15px;
-            color: var(--primary-color);
-            font-size: 1.4rem;
-        }
-
-        .project-card p {
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-            flex-grow: 1;
-        }
-
-        .project-meta {
-            display: flex;
-            justify-content: space-between;
-            margin-top: auto;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .project-meta span {
-            display: flex;
-            align-items: center;
-        }
-
-        .project-meta i {
-            margin-right: 5px;
-        }
-
-        .language-tag {
-            display: inline-block;
-            padding: 3px 8px;
-            background: var(--primary-color);
-            border-radius: 10px;
-            font-size: 0.8rem;
-            margin-right: 5px;
-        }
-
-        .loading {
-            text-align: center;
-            padding: 40px;
-            font-size: 1.2rem;
-        }
-
-        .loading i {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-        }
-
-        /* 工具样式 */
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            width: 100%;
-            margin-top: 30px;
-        }
-
-        .tool-card {
-            background: var(--bg-dark);
-            border-radius: 15px;
-            padding: 25px;
-            text-align: center;
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .tool-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            border-color: var(--primary-color);
-        }
-
-        .tool-card i {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-
-        .tool-card h3 {
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .tool-card p {
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-        }
-
-        /* 按钮样式 */
-        .button {
-            display: inline-block;
-            padding: 12px 28px;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border: none;
-            border-radius: 30px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
-        }
-
-        /* 联系方式样式 */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            width: 100%;
-            margin-top: 30px;
-        }
-
-        .contact-card {
-            background: var(--bg-dark);
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            transition: var(--transition);
-        }
-
-        .contact-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .contact-card i {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-
-        .contact-card h3 {
-            margin-bottom: 15px;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 40px;
-        }
-
-        .social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--bg-dark);
-            color: var(--text-light);
-            font-size: 1.3rem;
-            transition: var(--transition);
-        }
-
-        .social-link:hover {
-            transform: translateY(-5px);
-            background: var(--primary-color);
-        }
-
-        /* 页脚样式 */
-        footer {
-            background: var(--bg-dark);
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: 50px;
-        }
-
-        footer p {
-            margin-bottom: 10px;
-        }
-
-        /* 返回顶部按钮 */
-        #backToTop {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--primary-color);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: var(--transition);
-            opacity: 0;
-            visibility: hidden;
-            z-index: 999;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        #backToTop.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        #backToTop:hover {
-            transform: translateY(-5px);
-            background: var(--accent-color);
-        }
-
-        /* 移动端优化 */
-        @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            nav ul li {
-                margin: 5px 0;
-                width: 100%;
-                text-align: center;
-            }
-
-            nav ul li a {
-                display: block;
-                width: 100%;
-                padding: 12px;
-            }
-
-            h1 {
-                font-size: 2.2rem;
-            }
-
-            h2 {
-                font-size: 1.8rem;
-            }
-
-            .section-content {
-                padding: 30px 20px;
-            }
-
-            #videoPlayer {
-                height: 300px;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .tools-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            h2 {
-                font-size: 1.5rem;
-            }
-
-            .profilePic {
-                width: 180px;
-                height: 180px;
-            }
-
-            .section-content {
-                padding: 20px 15px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <!-- 粒子背景容器 -->
@@ -595,11 +15,13 @@
     <!-- 导航栏 -->
     <nav id="mainNav">
         <ul>
-            <li><a href="#home" class="navLink active" onclick="scrollToSection('home')">首页</a></li>
-            <li><a href="#portfolio" class="navLink" onclick="scrollToSection('portfolio')">作品集</a></li>
-            <li><a href="#github" class="navLink" onclick="scrollToSection('github')">GitHub项目</a></li>
-            <li><a href="#tools" class="navLink" onclick="scrollToSection('tools')">工具网站</a></li>
-            <li><a href="#contact" class="navLink" onclick="scrollToSection('contact')">联系方式</a></li>
+            <li><a href="#home" class="navLink active" onclick="scrollToSection('home')"><i class="fas fa-home"></i> 首页</a></li>
+            <li><a href="#portfolio" class="navLink" onclick="scrollToSection('portfolio')"><i class="fas fa-video"></i> 作品集</a></li>
+            <li><a href="#github" class="navLink" onclick="scrollToSection('github')"><i class="fab fa-github"></i> GitHub项目</a></li>
+            <li><a href="#tools" class="navLink" onclick="scrollToSection('tools')"><i class="fas fa-tools"></i> 工具网站</a></li>
+            <li><a href="#contact" class="navLink" onclick="scrollToSection('contact')"><i class="fas fa-address-card"></i> 联系方式</a></li>
+            <li><a href="UpdateLog.html" class="navLink" target="_blank"><i class="fas fa-history"></i> 更新日志</a></li>
+            <li><a href="services/serve.html" class="navLink" target="_blank"><i class="fas fa-cogs"></i> 服务</a></li>
         </ul>
     </nav>
 
@@ -610,23 +32,24 @@
                 <span id="typingEffect"></span>
                 <span id="cursor"></span>
             </h1>
-            <p>在这里你可以了解更多关于我、我的技能以及我的工作内容。</p>
+            <p><i class="fas fa-user-circle"></i> 在这里你可以了解更多关于我、我的技能以及我的工作内容。</p>
             
             <img src="images/profile.jpg" alt="我的头像" class="profilePic">
             
-            <h2>格言</h2>
+            <h2><i class="fas fa-quote-left"></i> 格言 <i class="fas fa-quote-right"></i></h2>
             <div id="quoteDisplay"></div>
             
-            <h2>关于我</h2>
-            <p>我的名字是SYSTEM-MEMZ-XEK,我是一位高中生，目前就读于炳辉中学。我热爱编程与计算机，喜欢研究新技术，学习新知识。我希望通过我的技能和经验为更多的人提供帮助。</p>
+            <h2><i class="fas fa-user"></i> 关于我</h2>
+            <p>我的名字是XEKernel,我是一位高中生，目前就读于炳辉中学。我热爱编程与计算机，喜欢研究新技术，学习新知识。我希望通过我的技能和经验为更多的人提供帮助。</p>
         </div>
     </section>
 
     <!-- 作品集部分 -->
     <section id="portfolio">
         <div class="section-content portfolioContent">
-            <h2>我在哔哩哔哩上的部分作品</h2>
+            <h2><i class="fas fa-video"></i> 我在哔哩哔哩上的部分作品</h2>
             <div class="video-selector">
+                <i class="fas fa-play-circle"></i>
                 <select id="videoSelect" onchange="changeVideo()">
                     <option value="https://player.bilibili.com/player.html?bvid=BV1ZwvKebEfh">当我试图在安卓模拟器上跑分</option>
                     <option value="https://player.bilibili.com/player.html?bvid=BV1oDaYefEbx">请选择你的杀毒软件</option>
@@ -646,8 +69,8 @@
     <!-- GitHub项目部分 -->
     <section id="github">
         <div class="section-content">
-            <h2>GitHub项目</h2>
-            <p>以下是我在GitHub上的一些开源项目：</p>
+            <h2><i class="fab fa-github"></i> GitHub项目</h2>
+            <p><i class="fas fa-code-branch"></i> 以下是我在GitHub上的一些开源项目：</p>
             <div id="projects-container" class="projects-grid">
                 <div class="loading">
                     <i class="fas fa-spinner fa-spin"></i>
@@ -655,7 +78,7 @@
                 </div>
             </div>
             <div style="text-align: center; margin-top: 40px;">
-                <button class="button" onclick="window.location.href='https://github.com/SYSTEM-MEMZ-XEK'">访问我的GitHub主页</button>
+                <button class="button" onclick="window.location.href='https://github.com/SYSTEM-MEMZ-XEK'"><i class="fab fa-github"></i> 访问我的GitHub主页</button>
             </div>
         </div>
     </section>
@@ -663,44 +86,44 @@
     <!-- 工具部分 -->   
     <section id="tools">
         <div class="section-content">
-            <h2>工具网站</h2>
-            <p>这里是我收藏的工具网站，你可以点击按钮来访问。</p>
+            <h2><i class="fas fa-tools"></i> 工具网站</h2>
+            <p><i class="fas fa-link"></i> 这里是我收藏的工具网站，你可以点击按钮来访问。</p>
             <div class="tools-grid">
                 <div class="tool-card">
                     <i class="fas fa-image"></i>
                     <h3>在线图片处理工具</h3>
                     <p>快速去除图片背景，编辑图片效果</p>
-                    <button class="button" onclick="window.location.href='https://www.remove.bg/zh'">访问网站</button>
+                    <button class="button" onclick="window.location.href='https://www.remove.bg/zh'"><i class="fas fa-external-link-alt"></i> 访问网站</button>
                 </div>
                 <div class="tool-card">
                     <i class="fas fa-chart-line"></i>
                     <h3>函数绘制工具</h3>
                     <p>可视化函数图像，辅助数学学习</p>
-                    <button class="button" onclick="window.location.href='https://www.geogebra.org/graphing?lang=zh_CN'">访问网站</button>
+                    <button class="button" onclick="window.location.href='https://www.geogebra.org/graphing?lang=zh_CN'"><i class="fas fa-external-link-alt"></i> 访问网站</button>
                 </div>
                 <div class="tool-card">
                     <i class="fas fa-calculator"></i>
                     <h3>数学计算器</h3>
                     <p>强大的科学计算器，支持复杂运算</p>
-                    <button class="button" onclick="window.location.href='https://www.desmos.com/scientific?lang=zh-CN'">访问网站</button>
+                    <button class="button" onclick="window.location.href='https://www.desmos.com/scientific?lang=zh-CN'"><i class="fas fa-external-link-alt"></i> 访问网站</button>
                 </div>
                 <div class="tool-card">
                     <i class="fas fa-robot"></i>
                     <h3>AI工具</h3>
                     <p>各种人工智能工具和资源</p>
-                    <button class="button" onclick="window.location.href='https://openi.cn/#term-8151'">访问网站</button>
+                    <button class="button" onclick="window.location.href='https://openi.cn/#term-8151'"><i class="fas fa-external-link-alt"></i> 访问网站</button>
                 </div>
                 <div class="tool-card">
                     <i class="fas fa-music"></i>
                     <h3>音乐下载</h3>
                     <p>高品质音乐搜索和下载</p>
-                    <button class="button" onclick="window.location.href='https://www.gequbao.com/'">访问网站</button>
+                    <button class="button" onclick="window.location.href='https://www.gequbao.com/'"><i class="fas fa-external-link-alt"></i> 访问网站</button>
                 </div>
                 <div class="tool-card">
                     <i class="fas fa-heart"></i>
                     <h3>星空下的表白</h3>
                     <p>浪漫的表白页面，分享你的心意</p>
-                    <button class="button" onclick="window.location.href='heart.html'">体验一下</button>
+                    <button class="button" onclick="window.location.href='heart.html'"><i class="fas fa-heart"></i> 体验一下</button>
                 </div>
             </div>
         </div>
@@ -709,32 +132,32 @@
     <!-- 联系方式部分 -->
     <section id="contact">
         <div class="section-content">
-            <h2>联系方式</h2>
-            <p>你可以通过以下方式联系我：</p>
+            <h2><i class="fas fa-address-card"></i> 联系方式</h2>
+            <p><i class="fas fa-envelope-open-text"></i> 你可以通过以下方式联系我：</p>
             <div class="contact-grid">
                 <div class="contact-card">
                     <i class="fas fa-envelope"></i>
                     <h3>邮箱</h3>
                     <p>XEK20090428@163.com</p>
-                    <button class="button" onclick="window.location.href='mailto:XEK20090428@163.com'">发送邮件</button>
+                    <button class="button" onclick="window.location.href='mailto:XEK20090428@163.com'"><i class="fas fa-paper-plane"></i> 发送邮件</button>
                 </div>
                 <div class="contact-card">
                     <i class="fab fa-qq"></i>
                     <h3>QQ</h3>
                     <p>1635075096 或 3956978117(小号)</p>
-                    <button class="button" onclick="copyToClipboard('1635075096')">复制QQ号</button>
+                    <button class="button" onclick="copyToClipboard('1635075096')"><i class="fas fa-copy"></i> 复制QQ号</button>
                 </div>
                 <div class="contact-card">
                     <i class="fab fa-bilibili"></i>
                     <h3>哔哩哔哩</h3>
                     <p>关注我的B站主页</p>
-                    <button class="button" onclick="window.location.href='https://space.bilibili.com/3493115711196019'">访问主页</button>
+                    <button class="button" onclick="window.location.href='https://space.bilibili.com/3493115711196019'"><i class="fab fa-bilibili"></i> 访问主页</button>
                 </div>
                 <div class="contact-card">
                     <i class="fab fa-github"></i>
                     <h3>GitHub</h3>
                     <p>查看我的开源项目</p>
-                    <button class="button" onclick="window.location.href='https://github.com/SYSTEM-MEMZ-XEK'">访问主页</button>
+                    <button class="button" onclick="window.location.href='https://github.com/SYSTEM-MEMZ-XEK'"><i class="fab fa-github"></i> 访问主页</button>
                 </div>
             </div>
         </div>
@@ -742,288 +165,18 @@
 
     <!-- 返回顶部按钮 -->
     <div id="backToTop">
-        <i class="fas fa-chevron-up"></i>
+        <i class="fas fa-arrow-up"></i>
     </div>
 
     <footer class="footer">
-        <p>Copyright &copy; 2024-2025 SYSTEM-MEMZ-XEK. 保留所有权利</p>
-        <p>本网站由 SYSTEM-MEMZ-XEK 设计与开发</p>
+        <p><i class="fas fa-copyright"></i> Copyright &copy; 2024-2026 XEKernel. 保留所有权利</p>
+        <p><i class="fas fa-code"></i> 本网站由 SYSTEM-MEMZ-XEK 设计与开发</p>
     </footer>
 
     <!-- 粒子效果库 -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    
+    <script src="https://cdn.bootcdn.net/ajax/libs/particles.js/2.0.0/particles.min.js" crossorigin="anonymous" onerror="this.onerror=null;this.src='https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js'"></script>
+    <script src="js/script.js"></script>
     <script>
-        // 粒子背景初始化
-        particlesJS('particles-js', {
-            particles: {
-                number: {
-                    value: 80,
-                    density: {
-                        enable: true,
-                        value_area: 800
-                    }
-                },
-                color: {
-                    value: "#4A90E2"
-                },
-                shape: {
-                    type: "circle",
-                    stroke: {
-                        width: 0,
-                        color: "#000000"
-                    }
-                },
-                opacity: {
-                    value: 0.5,
-                    random: true,
-                    anim: {
-                        enable: true,
-                        speed: 1,
-                        opacity_min: 0.1,
-                        sync: false
-                    }
-                },
-                size: {
-                    value: 3,
-                    random: true,
-                    anim: {
-                        enable: true,
-                        speed: 2,
-                        size_min: 0.1,
-                        sync: false
-                    }
-                },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: "#4A90E2",
-                    opacity: 0.4,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 2,
-                    direction: "none",
-                    random: true,
-                    straight: false,
-                    out_mode: "out",
-                    bounce: false,
-                    attract: {
-                        enable: false,
-                        rotateX: 600,
-                        rotateY: 1200
-                    }
-                }
-            },
-            interactivity: {
-                detect_on: "canvas",
-                events: {
-                    onhover: {
-                        enable: true,
-                        mode: "grab"
-                    },
-                    onclick: {
-                        enable: true,
-                        mode: "push"
-                    },
-                    resize: true
-                },
-                modes: {
-                    grab: {
-                        distance: 140,
-                        line_linked: {
-                            opacity: 1
-                        }
-                    },
-                    push: {
-                        particles_nb: 4
-                    }
-                }
-            },
-            retina_detect: true
-        });
-
-        // 打字效果
-        async function typeWriter(text, element, cursorElement, speed = 100) {
-            element.innerHTML = '';
-            cursorElement.style.visibility = 'visible';
-
-            for (let i = 0; i < text.length; i++) {
-                element.innerHTML += text[i];
-                await new Promise(resolve => setTimeout(resolve, speed + Math.random() * 20));
-            }
-
-            for (let i = 0; i < 3; i++) {
-                cursorElement.style.opacity = '0';
-                await new Promise(resolve => setTimeout(resolve, 200));
-                cursorElement.style.opacity = '1';
-                await new Promise(resolve => setTimeout(resolve, 200));
-            }
-            cursorElement.style.visibility = 'hidden';
-        }
-
-        // 格言循环显示
-        const quotes = [
-            "人一旦有了隔阂就真的走不近了，断了的绳子怎么系都有结，这世上只有和好，没有如初和好容易，如初太难",
-            "爱情之酒甜而苦。两人喝，是甘露；三人喝，是酸醋；随便喝，要中毒。",
-            "爱情是女人一生的历史，而只是男人一生中的一段插曲。",
-            "没有爱情的人生是什么？是没有黎明的长夜！",
-            "爱一个人就是指帮助他回到自己，使他更是他自己。",
-            "友情是永不放弃的信念——永远相信，永远相信，永远相信。",
-            "友情是永不中断的TCP连接——双向奔赴，持久稳定。",
-            "爱情像递归算法：需要终止条件，更需要永恒的热情。",
-            "温暖的话语能穿透最坚硬的防火墙，直达心底。",
-            "陪伴是最长情的告白，就像永不超时的心跳包。",    
-        ];
-
-        function displayQuotes() {
-            let currentQuoteIndex = 0;
-            const quoteDisplay = document.getElementById("quoteDisplay");
-            setInterval(() => {
-                quoteDisplay.style.opacity = 0;
-                setTimeout(() => {
-                    quoteDisplay.innerHTML = quotes[currentQuoteIndex];
-                    quoteDisplay.style.opacity = 1;
-                    currentQuoteIndex = (currentQuoteIndex + 1) % quotes.length;
-                }, 500);
-            }, 5000);
-        }
-
-        // 视频切换功能
-        function changeVideo() {
-            var select = document.getElementById("videoSelect");
-            var iframe = document.getElementById("videoPlayer");
-            iframe.src = select.value;
-        }
-
-        // 滚动导航高亮
-        function highlightNavOnScroll() {
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.navLink');
-            
-            let currentSection = '';
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                const sectionHeight = section.clientHeight;
-                if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-                    currentSection = section.getAttribute('id');
-                }
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').substring(1) === currentSection) {
-                    link.classList.add('active');
-                }
-            });
-        }
-
-        // 平滑滚动到指定部分
-        function scrollToSection(sectionId) {
-            document.getElementById(sectionId).scrollIntoView({
-                behavior: 'smooth'
-            });
-        }
-
-        // 返回顶部功能
-        function setupBackToTop() {
-            const backToTopBtn = document.getElementById('backToTop');
-            
-            window.addEventListener('scroll', () => {
-                if (window.pageYOffset > 300) {
-                    backToTopBtn.classList.add('show');
-                } else {
-                    backToTopBtn.classList.remove('show');
-                }
-            });
-            
-            backToTopBtn.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            });
-        }
-
-        // 导航栏滚动效果
-        function setupNavScroll() {
-            const nav = document.getElementById('mainNav');
-            
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    nav.classList.add('scrolled');
-                } else {
-                    nav.classList.remove('scrolled');
-                }
-            });
-        }
-
-        // 复制到剪贴板功能
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                alert('QQ号已复制到剪贴板: ' + text);
-            });
-        }
-
-        // GitHub API调用
-        async function fetchGitHubProjects() {
-            const username = 'SYSTEM-MEMZ-XEK';
-            const apiUrl = `https://api.github.com/users/${username}/repos?sort=updated&per_page=6`;
-            
-            try {
-                const response = await fetch(apiUrl);
-                const projects = await response.json();
-                
-                if (!response.ok) {
-                    throw new Error('获取GitHub项目失败');
-                }
-                
-                displayProjects(projects);
-            } catch (error) {
-                console.error('Error fetching GitHub projects:', error);
-                document.getElementById('projects-container').innerHTML = `
-                    <div class="loading">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <p>无法加载项目，请稍后重试</p>
-                    </div>
-                `;
-            }
-        }
-
-        // 显示GitHub项目
-        function displayProjects(projects) {
-            const container = document.getElementById('projects-container');
-            
-            if (!projects || projects.length === 0) {
-                container.innerHTML = `
-                    <div class="loading">
-                        <i class="fas fa-folder-open"></i>
-                        <p>暂无公开项目</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            container.innerHTML = projects.map(project => `
-                <div class="project-card">
-                    <h3>${project.name}</h3>
-                    <p>${project.description || '暂无描述'}</p>
-                    <div class="project-meta">
-                        <span>
-                            <i class="fas fa-code"></i>
-                            <span class="language-tag">${project.language || '未指定'}</span>
-                        </span>
-                        <span>
-                            <i class="far fa-star"></i> ${project.stargazers_count}
-                        </span>
-                    </div>
-                    <button class="button" onclick="window.location.href='${project.html_url}'">查看项目</button>
-                </div>
-            `).join('');
-        }
-
         // 页面加载完成后初始化
         window.onload = () => {
             const text = "欢迎来到我的个人网站";
@@ -1033,15 +186,8 @@
             cursorElement.style.visibility = 'hidden';
 
             setTimeout(() => {
-                typeWriter(text, typingElement, cursorElement, 80);
-            }, 500);
-
-            displayQuotes();
-            setupBackToTop();
-            setupNavScroll();
-            fetchGitHubProjects();
-            
-            window.addEventListener('scroll', highlightNavOnScroll);
+                typeWriter(text, typingElement, cursorElement, 70);
+            }, 400);
         }
     </script>
 </body>
