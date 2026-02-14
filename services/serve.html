@@ -255,13 +255,37 @@
     <!-- 粒子背景容器 -->
     <div id="particles-js"></div>
 
+    <!-- 动态背景装饰 -->
+    <div class="bg-decoration">
+        <div class="floating-shape shape-1"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="floating-shape shape-3"></div>
+        <div class="floating-shape shape-4"></div>
+        <div class="floating-shape shape-5"></div>
+    </div>
+
     <!-- 导航栏 -->
     <nav id="mainNav">
-        <ul>
-            <li><a href="../index.html" class="navLink"><i class="fas fa-home"></i> 首页</a></li>
-            <li><a href="../UpdateLog.html" class="navLink"><i class="fas fa-history"></i> 更新日志</a></li>
-            <li><a href="serve.html" class="navLink active"><i class="fas fa-cogs"></i> 服务</a></li>
-        </ul>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-atom"></i>
+                <span>XEKernel</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html" class="navLink"><i class="fas fa-home"></i> 首页</a></li>
+                <li><a href="../index.html#portfolio" class="navLink"><i class="fas fa-video"></i> 作品集</a></li>
+                <li><a href="../index.html#github" class="navLink"><i class="fab fa-github"></i> GitHub项目</a></li>
+                <li><a href="../index.html#tools" class="navLink"><i class="fas fa-tools"></i> 工具网站</a></li>
+                <li><a href="../index.html#contact" class="navLink"><i class="fas fa-address-card"></i> 联系方式</a></li>
+                <li><a href="../UpdateLog.html" class="navLink"><i class="fas fa-history"></i> 更新日志</a></li>
+                <li><a href="serve.html" class="navLink active"><i class="fas fa-cogs"></i> 服务</a></li>
+            </ul>
+            <div class="menu-toggle" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </nav>
     
     <!-- 公告模态框 -->
@@ -293,7 +317,7 @@
                         <li>基础响应式设计</li>
                         <li>部署上线支持</li>
                     </ul>
-                    <a href="web.html" class="service-button">查看网页开源项目</a>
+                    <a href="projects.html" class="service-button">查看开源项目</a>
                 </div>
 
                 <div class="service-card">
@@ -307,7 +331,7 @@
                         <li>简单应用</li>
                         <li>维护与调试</li>
                     </ul>
-                    <a href="Csharp.html" class="service-button">查看C#开源项目</a>
+                    <a href="projects.html" class="service-button">查看开源项目</a>
                 </div>
                 
                 <div class="service-card">
@@ -320,7 +344,7 @@
                         <li>数据抓取处理</li>
                         <li>简单应用</li>
                     </ul>
-                    <a href="Python.html" class="service-button">查看Python开源项目</a>
+                    <a href="projects.html" class="service-button">查看开源项目</a>
                 </div>
                 
                 <div class="service-card">
@@ -399,8 +423,15 @@
         }
     </script>
     
-    <footer>
-        <p><i class="fas fa-copyright"></i> Copyright &copy; 2024-2026 XEKernel. 保留所有权利</p>
+    <footer class="footer">
+        <div class="footer-content">
+            <p><i class="fas fa-copyright"></i> Copyright &copy; 2024-2026 XEKernel. 保留所有权利</p>
+            <p><i class="fas fa-code"></i> 本网站由 SYSTEM-MEMZ-XEK 设计与开发</p>
+            <div class="footer-links">
+                <a href="../index.html"><i class="fas fa-home"></i> 返回首页</a>
+                <a href="../UpdateLog.html"><i class="fas fa-history"></i> 更新日志</a>
+            </div>
+        </div>
     </footer>
 </body>
 </html>
